@@ -209,6 +209,44 @@
       0% { transform: translateX(0); }
       100% { transform: translateX(110vw); }
     }
+    /* --- ANİMASYON 5: GLITCH VE KAOTİK ÇÖKÜŞ --- */
+    .anim-glitch {
+      animation: glitchSkew 0.25s infinite;
+      color: #ff0055;
+      text-shadow: 4px 0 #00ffff, -4px 0 #00ff00;
+    }
+    @keyframes glitchSkew {
+      0% { transform: skew(0deg); }
+      20% { transform: skew(-25deg) scaleY(1.2); }
+      40% { transform: skew(20deg) scaleX(0.8); }
+      60% { transform: skew(-10deg) translate(-10px, 5px); }
+      80% { transform: skew(30deg) translate(10px, -5px); }
+      100% { transform: skew(0deg); }
+    }
+
+    /* --- ANİMASYON 6: ROKET FIRLAMASI --- */
+    .anim-rocket {
+      animation: rocketLaunch 1.4s cubic-bezier(0.6, -0.28, 0.735, 0.045) forwards;
+    }
+    @keyframes rocketLaunch {
+      0% { transform: translateY(0); }
+      15% { transform: translateY(12px) scale(1.05, 0.95); } /* Ateşleme öncesi sıkışma */
+      30% { transform: translateY(-8px) scale(0.95, 1.05); }
+      45% { transform: translateY(4px); }
+      100% { transform: translateY(-130vh) scale(0.7, 1.4); opacity: 0; } /* Gökyüzüne uçuş */
+    }
+
+    /* --- ANİMASYON 7: ELASTİK ERİME / YERÇEKİMİ BOZULMASI --- */
+    .anim-melt {
+      animation: puddleMelt 1.6s forwards cubic-bezier(0.55, 0.055, 0.675, 0.19);
+      transform-origin: bottom center;
+    }
+    @keyframes puddleMelt {
+      0% { transform: scale(1, 1); }
+      40% { transform: scale(1.3, 0.6) translateY(20px); }
+      75% { transform: scale(2.2, 0.15) translateY(42vh); filter: blur(2px); }
+      100% { transform: scale(3.5, 0.02) translateY(48vh); filter: blur(5px); opacity: 0; }
+    }
   </style>
 </head>
 <body>
@@ -276,7 +314,15 @@
     // Durum takibi: Animasyon oynuyor mu?
     let isAnimated = false;
     let lastAnimIndex = -1;
-    const animations = ['anim-spin', 'anim-fall', 'anim-vanish', 'anim-walking'];
+    const animations = [
+      'anim-spin', 
+      'anim-fall', 
+      'anim-vanish', 
+      'anim-walking',
+      'anim-glitch',
+      'anim-rocket',
+      'anim-melt'
+    ];
 
     function resetFerat() {
       const el = document.getElementById('ferat-target');
