@@ -33,7 +33,30 @@
       border-top: 1px solid #30363d;
       margin: 40px 0 24px 0;
     }
-    /* Mailleri en sağa yaslayan ve aynı dikey hizada başlatan Grid yapısı */
+
+    /* Ana Sayfadaki Buton - Tam Ortalanmış */
+    .btn-container {
+      margin: 35px 0;
+      display: flex;
+      justify-content: center;
+    }
+    .retro-btn {
+      background: #161b22;
+      color: #58a6ff;
+      border: 1px solid #30363d;
+      padding: 10px 20px;
+      font-family: monospace;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .retro-btn:hover {
+      background: #21262d;
+      border-color: #8b949e;
+      color: #f0f6fc;
+    }
+
+    /* Mailleri en sağa yaslayan ve aynı dikey hizada başlatan Grid */
     .contact-container {
       display: flex;
       justify-content: flex-end;
@@ -53,33 +76,239 @@
     .contact-grid .email {
       text-align: left;
     }
+
+    /* --- BEYAZ RETRO EKRAN --- */
+    #retro-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: #ffffff;
+      color: #000000;
+      z-index: 999999;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .giant-text {
+      display: flex;
+      font-size: clamp(4rem, 16vw, 12rem);
+      font-weight: 900;
+      letter-spacing: 4px;
+      user-select: none;
+      position: relative;
+    }
+
+    .char {
+      display: inline-block;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    /* Sağ Alttaki Easter Egg Butonu */
+    .easter-btn {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      background: #000000;
+      color: #ffffff;
+      border: 2px solid #000000;
+      padding: 8px 14px;
+      font-family: monospace;
+      font-size: 0.85rem;
+      font-weight: bold;
+      cursor: pointer;
+      z-index: 10;
+    }
+    .easter-btn:hover {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    /* Geri Dönüş Butonu (Sol Üst) */
+    .exit-btn {
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      background: transparent;
+      color: #888888;
+      border: none;
+      font-family: monospace;
+      font-size: 0.85rem;
+      cursor: pointer;
+    }
+    .exit-btn:hover {
+      color: #000000;
+    }
+
+    /* --- ANİMASYON 1: DÖNME --- */
+    .anim-spin {
+      animation: crazySpin 1.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    }
+    @keyframes crazySpin {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.2); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    /* --- ANİMASYON 2: PİKSELLEŞİP YERE DÜŞME --- */
+    .anim-fall {
+      animation: pixelFall 1.5s forwards ease-in;
+    }
+    @keyframes pixelFall {
+      0% { transform: translateY(0); filter: blur(0px); }
+      20% { filter: contrast(300%) blur(1px); transform: translateY(-15px); }
+      40% { filter: contrast(800%) blur(4px); }
+      100% { transform: translateY(85vh) rotate(15deg); filter: contrast(1000%) blur(8px); opacity: 0; }
+    }
+
+    /* --- ANİMASYON 3: YOK OLMA (VAPORIZE) --- */
+    .anim-vanish {
+      animation: vaporize 1s forwards cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    @keyframes vaporize {
+      0% { transform: scale(1); opacity: 1; filter: blur(0px); }
+      50% { transform: scale(1.6); opacity: 0.5; filter: blur(12px); letter-spacing: 35px; }
+      100% { transform: scale(2.2); opacity: 0; filter: blur(30px); letter-spacing: 60px; }
+    }
+
+    /* --- ANİMASYON 4: BACAK ÇIKARIP YÜRÜME --- */
+    .anim-walking {
+      animation: strollAcross 5s linear forwards;
+    }
+    /* Harflerin altından çıkan çöp bacaklar */
+    .anim-walking .char::before,
+    .anim-walking .char::after {
+      content: '';
+      position: absolute;
+      bottom: -32px;
+      width: 5px;
+      height: 34px;
+      background: #000000;
+      transform-origin: top center;
+    }
+    .anim-walking .char::before {
+      left: 25%;
+      animation: leftLeg 0.4s infinite alternate ease-in-out;
+    }
+    .anim-walking .char::after {
+      right: 25%;
+      animation: rightLeg 0.4s infinite alternate-reverse ease-in-out;
+    }
+
+    @keyframes leftLeg {
+      0% { transform: rotate(-35deg); }
+      100% { transform: rotate(35deg); }
+    }
+    @keyframes rightLeg {
+      0% { transform: rotate(-35deg); }
+      100% { transform: rotate(35deg); }
+    }
+    @keyframes strollAcross {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(110vw); }
+    }
   </style>
 </head>
 <body>
-  <h1>ferat.dev</h1>
 
-  <p>Felt ancient today, so here is a blog documenting the early midlife crisis. We might get into computational wave mechanics, high-order Galerkin methods, inverse problems, graph and knot theory, slide rules, FWI—or honestly idk bro, just give me a minute. It’s been way too long since my last website, which literally just featured the word "FERAT" in an obnoxious font right in the center of a blank page.</p>
+  <div id="main-content">
+    <h1>ferat.dev</h1>
 
+    <p>Felt ancient today, so here is a blog documenting the early midlife crisis. We might get into computational wave mechanics, high-order Galerkin methods, inverse problems, graph and knot theory, slide rules, FWI—or honestly idk bro, just give me a minute. It’s been way too long since my last website, which literally just featured the word "FERAT" in an obnoxious font right in the center of a blank page.</p>
 
-  <hr>
+    <!-- Tam Ortalanmış Nostalji Butonu -->
+    <div class="btn-container">
+      <button class="retro-btn" onclick="showRetroWebsite()">[ take me back to that glorious blank website ]</button>
+    </div>
 
-  <div class="contact-container">
-    <div class="contact-grid">
-      <span class="label">just wanted to mail or some?:</span>
-      <span class="email"><a href="mailto:isawpagewascoolafngl@ferat.dev">isawpagewascoolafngl@ferat.dev</a></span>
+    <hr>
 
-      <span class="label">make a project together or some?:</span>
-      <span class="email"><a href="mailto:ilovemath@ferat.dev">ilovemath@ferat.dev</a></span>
+    <div class="contact-container">
+      <div class="contact-grid">
+        <span class="label">just wanted to mail or some?:</span>
+        <span class="email"><a href="mailto:isawpagewascoolafngl@ferat.dev">isawpagewascoolafngl@ferat.dev</a></span>
 
-      <span class="label">talk about homology or some?:</span>
-      <span class="email"><a href="mailto:nohomobut@ferat.dev">nohomobut@ferat.dev</a></span>
+        <span class="label">make a project together or some?:</span>
+        <span class="email"><a href="mailto:ilovemath@ferat.dev">ilovemath@ferat.dev</a></span>
 
-      <span class="label">lets earn money or some?:</span>
-      <span class="email"><a href="mailto:earthsciencepaysfr@ferat.dev">earthsciencepaysfr@ferat.dev</a></span>
+        <span class="label">talk about homology or some?:</span>
+        <span class="email"><a href="mailto:nohomobut@ferat.dev">nohomobut@ferat.dev</a></span>
 
-      <span class="label">Sir, your website and conduct during work hours are completely unprofessional. You won't survive in corporate like this or some?:</span>
-      <span class="email"><a href="mailto:lifeismeaninglessanyway@ferat.dev">lifeismeaninglessanyway@ferat.dev</a></span>
+        <span class="label">lets earn money or some?:</span>
+        <span class="email"><a href="mailto:earthsciencepaysfr@ferat.dev">earthsciencepaysfr@ferat.dev</a></span>
+
+        <span class="label">Sir, your website and conduct during work hours are completely unprofessional. You won't survive in corporate like this or some?:</span>
+        <span class="email"><a href="mailto:lifeismeaninglessanyway@ferat.dev">lifeismeaninglessanyway@ferat.dev</a></span>
+      </div>
     </div>
   </div>
+
+  <!-- Beyaz Retro Ekran -->
+  <div id="retro-screen">
+    <button class="exit-btn" onclick="hideRetroWebsite()">[ esc / go back ]</button>
+
+    <div class="giant-text" id="ferat-target">
+      <span class="char">F</span>
+      <span class="char">E</span>
+      <span class="char">R</span>
+      <span class="char">A</span>
+      <span class="char">T</span>
+    </div>
+
+    <button class="easter-btn" id="easter-trigger" onclick="handleEasterEgg()">[ easteregg or some shi ]</button>
+  </div>
+
+  <script>
+    function showRetroWebsite() {
+      document.getElementById('retro-screen').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+      resetFerat();
+    }
+
+    function hideRetroWebsite() {
+      document.getElementById('retro-screen').style.display = 'none';
+      document.body.style.overflow = 'auto';
+      resetFerat();
+    }
+
+    // Durum takibi: Animasyon oynuyor mu?
+    let isAnimated = false;
+    let lastAnimIndex = -1;
+    const animations = ['anim-spin', 'anim-fall', 'anim-vanish', 'anim-walking'];
+
+    function resetFerat() {
+      const el = document.getElementById('ferat-target');
+      animations.forEach(cls => el.classList.remove(cls));
+      isAnimated = false;
+    }
+
+    function handleEasterEgg() {
+      const el = document.getElementById('ferat-target');
+
+      // Eğer zaten animasyondaysa: Normale döndür
+      if (isAnimated) {
+        resetFerat();
+        return;
+      }
+
+      // Değilse: Rastgele bir animasyon seç
+      let nextIndex;
+      do {
+        nextIndex = Math.floor(Math.random() * animations.length);
+      } while (nextIndex === lastAnimIndex); // Üst üste aynı animasyon gelmesin
+
+      lastAnimIndex = nextIndex;
+      el.classList.add(animations[nextIndex]);
+      isAnimated = true;
+    }
+
+    // ESC tuşuyla beyaz ekrandan çıkma
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') hideRetroWebsite();
+    });
+  </script>
+
 </body>
 </html>
